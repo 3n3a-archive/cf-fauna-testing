@@ -30,19 +30,20 @@ router.get("/", () => {
   return new Response(`Mongo-cf test`)
 })
 
-router.get("/db", async () => {
+router.get("/quote/random", async () => {
     let res = ""
     try {
-         let test = await faunaClient.query(
-        Get(Ref(Collection("test"), "332480970746757320"))
+         let quotes = await faunaClient.query(
+        Get(Documents(Collection("test")))
         )
-        res = test.data.test
+        res = quotes
     
     }
     catch (e) {
         res = getFaunaError(e)
     }
     return new Response(JSON.stringify(res), {
+        status: res.statusCode,
         headers: {
             "Content-Type": "application/json"
         }
