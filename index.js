@@ -22,6 +22,7 @@ const {
   Let,
   Var,
   Update,
+  Documents
 } = faunadb.query;
 
 const router = Router()
